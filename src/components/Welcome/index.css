@@ -1,0 +1,32 @@
+.welcome_wrapper {
+  display: flex;
+  height: 40em;
+  width: 100%;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.welcome_wrapper .title {
+  width: 70%;
+  height: 30%;
+  background: orange;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.welcome_wrapper .title p {
+  font-size: 3em;
+}
+.welcome_wrapper .confirm {
+  margin: 0;
+  padding: 0;
+  height: 3em;
+  width: 10em;
+  background-color: orange;
+  font-size: 1.2em;
+  outline: none;
+  border: 1px solid transparent;
+}
+.welcome_wrapper .confirm:hover {
+  cursor: pointer;
+}
