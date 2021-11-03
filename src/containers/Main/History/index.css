@@ -1,7 +1,9 @@
 .history_wrapper{
     width: 30%;
-    min-width: 20rem;
+    min-width: 27rem;
     height: 33rem;
     background: pink;
     transition: all 0.6s;
+    border: white 1px solid;
+    border-radius: 1rem;
 }

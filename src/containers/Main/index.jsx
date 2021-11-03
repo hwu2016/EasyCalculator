@@ -7,14 +7,14 @@ import './index.css'
 export default class Main extends Component {
     state = {
         opacity: 0,
-        width: 0
+        width: '100%'
     }
 
     componentDidMount(){
         let {opacity} = this.state
         this.timer = setInterval(() => {
             opacity += 0.05
-            this.setState({opacity})
+            this.setState({opacity, width: '62rem'})
             if (opacity >= 1){
                 clearInterval(this.timer)
             }
@@ -22,9 +22,9 @@ export default class Main extends Component {
     }
 
     render() {
-        const {opacity} = this.state
+        const {opacity, width} = this.state
         return (
-            <div className="main_wrapper" style={{opacity: opacity}}>
+            <div className="main_wrapper" style={{opacity, width}}>
                 <Simple/>
                 <History/>
             </div>

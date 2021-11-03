@@ -1,10 +1,9 @@
 .main_wrapper{
     margin: auto;
     display: flex;
-    width: 100%;
-    min-width: 75rem;
+    min-width: 62rem;
     height: 40rem;
-    background: white;
     align-items: center;
     justify-content: space-between;
+    transition: all 0.6s;
 }
