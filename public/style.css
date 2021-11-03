@@ -33,6 +33,10 @@
   content: "\eab0";
 }
 
+html{
+  font-size: 16px;
+}
+
 body{
   background-color: #333;
 }
