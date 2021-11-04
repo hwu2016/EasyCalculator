@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import Simple from './Simple'
 import History from './History'
+import store from '../../redux/store'
+import { Provider } from 'react-redux'
 import './index.css'
 
 
@@ -25,8 +27,10 @@ export default class Main extends Component {
         const {opacity, width} = this.state
         return (
             <div className="main_wrapper" style={{opacity, width}}>
-                <Simple/>
-                <History/>
+                <Provider store={store}>
+                    <Simple/>
+                    <History/>
+                </Provider>
             </div>
         )
     }
