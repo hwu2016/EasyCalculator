@@ -1,4 +1,5 @@
 .simple_wrapper{
+    position: relative;
     width: 30%;
     min-width: 33rem;
     height: 33rem;
@@ -61,4 +62,19 @@
 
 .dot {
     background-color: lightgray;
+}
+
+#error {
+    position: absolute;
+    top: 5rem;
+    left: 1rem;
+    height: 1rem;
+    width: 30rem;
+}
+
+.error_display{
+    width: 100%;
+    height: 100%;
+    font-size: 1rem;
+    color: white
 }

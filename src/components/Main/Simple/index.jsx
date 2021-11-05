@@ -1,14 +1,14 @@
 import React, { Component } from 'react'
-
-// import {clickTypeInAction, deleteAction, typeDivideTimesAction} from '../../../redux/actions/simple';
-
-// import {connect} from 'react-redux'
+import Error from './Error'
+import Evaluator from './Evaluator'
+import PubSub from 'pubsub-js'
 
 import './index.css'
 
-
 export default class Simple extends Component {
-    state = {userInput: ''}
+    state = {
+        userInput: '',
+    }
 
     //点击输入除等号和CE外的其他键
     clickTypeIn = (e) => {
@@ -54,9 +54,23 @@ export default class Simple extends Component {
     }
 
 
-    //注册键盘事件
     componentDidMount(){
+        //注册键盘事件
         document.addEventListener('keydown', this.kbEvent)
+        //订阅从Evaluator更新的结果消息
+        this.tokenResult = PubSub.subscribe('result', (_,stateObj) => {
+            this.setState(stateObj)
+            this.input.innerHTML = this.state.userInput
+        })
+    }
+
+    //每次更新发布消息，通知取消报错提示
+    componentDidUpdate(){
+        PubSub.publish('input')
+    }
+
+    componentWillUnmount(){
+        PubSub.unsubscribe(this.tokenResult)
     }
 
     render() {
@@ -82,18 +96,11 @@ export default class Simple extends Component {
                     <button onClick={this.clickTypeIn} className="bottom-left num">0</button>
                     <button onClick={this.clickTypeIn} className="dot">.</button>
                     <button onClick={this.clickTypeIn} className="operator">+</button>
-                    <button className="bottom-right equal">=</button>
+                    <Evaluator curInput={this.state.userInput}/>
+                    <Error/>
                 </div>
             </div>
         )
     }
 }
 
-// export default connect(
-//     state => ({userInput: state}),
-//     {
-//         doClickType: clickTypeInAction,
-//         doDelete: deleteAction,
-//         doTypeDivideTimes: typeDivideTimesAction,
-//     }
-// )(Simple)
