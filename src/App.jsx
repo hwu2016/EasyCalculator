@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Externals from './components/Externals'
-import Welcome from './components/Welcome'
+// import Welcome from './components/Welcome'
 import Main from './containers/Main'
 
 export default class App extends Component {
@@ -15,7 +15,8 @@ export default class App extends Component {
   render() {
     return(
       <div>
-        {this.state.isStart === false ? <Welcome startApp={this.startApp}/> : <Main/>} 
+        {/* {this.state.isStart === false ? <Welcome startApp={this.startApp}/> : <Main/>}  */}
+        <Main/>
         <Externals />
       </div>
     )
