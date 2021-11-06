@@ -12,18 +12,22 @@ export default class Simple extends Component {
 
     //点击输入除等号和CE外的其他键
     clickTypeIn = (e) => {
+        const {userInput} = this.state
         //限制最长字符
-        if (this.input.innerHTML.length >= 20) return;
-        const data = e.target.innerHTML
-        this.input.innerHTML += data 
-        this.setState({userInput: this.input.innerHTML})
+        if (userInput.length >= 20) return;
+        const data = e.target.innerHTML 
+        this.setState({userInput: userInput + data })
     }
 
     //CE：删除最后字符
     deleteLast = () => {
-        let cur_input = this.input.innerHTML
-        this.input.innerHTML = cur_input.substr(0, cur_input.length - 1)
-        this.setState({userInput: this.input.innerHTML})
+        const {userInput} = this.state
+        this.setState({userInput: userInput.substr(0, userInput.length - 1)})
+    }
+
+    //AC：删除所有字符
+    deleteAll = () => {
+        this.setState({userInput: ''})
     }
 
     //统一处理键盘事件
@@ -47,8 +51,7 @@ export default class Simple extends Component {
                 this.deleteNode.click()
                 break
             default:
-                this.input.innerHTML += e.key
-                this.setState({userInput: this.input.innerHTML})
+                this.setState({userInput: this.state.userInput + e.key})
                 break
         }
     }
@@ -60,13 +63,13 @@ export default class Simple extends Component {
         //订阅从Evaluator更新的结果消息
         this.tokenResult = PubSub.subscribe('result', (_,stateObj) => {
             this.setState(stateObj)
-            this.input.innerHTML = this.state.userInput
         })
     }
 
-    //每次更新发布消息，通知取消报错提示
+    //每次组件更新时，发布消息，通知Error取消报错提示，通知Evaluator改变当前状态
     componentDidUpdate(){
         PubSub.publish('input')
+        PubSub.publish('updateIsError')
     }
 
     componentWillUnmount(){
@@ -74,10 +77,11 @@ export default class Simple extends Component {
     }
 
     render() {
+        const {userInput} = this.state
         return (
             <div className="simple_wrapper">
                 <div className="simple_grids">
-                    <span ref={c => this.input = c} id="user_input" maxLength="15"></span>
+                    <span id="user_input">{userInput}</span>
                     <button onClick={this.clickTypeIn} className="num">7</button>
                     <button onClick={this.clickTypeIn} className="num">8</button>
                     <button onClick={this.clickTypeIn} className="num">9</button>
@@ -93,10 +97,11 @@ export default class Simple extends Component {
                     <button onClick={this.clickTypeIn} className="num">3</button>
                     <button onClick={this.clickTypeIn} className="operator">-</button>
                     <button onClick={this.deleteLast} ref={c => this.deleteNode = c} className="special">CE</button>
-                    <button onClick={this.clickTypeIn} className="bottom-left num">0</button>
+                    <button onClick={this.deleteAll} className="bottom-left special">AC</button>
+                    <button onClick={this.clickTypeIn} className="num">0</button>
                     <button onClick={this.clickTypeIn} className="dot">.</button>
                     <button onClick={this.clickTypeIn} className="operator">+</button>
-                    <Evaluator curInput={this.state.userInput}/>
+                    <Evaluator curInput={userInput}/>
                     <Error/>
                 </div>
             </div>
