@@ -25,3 +25,20 @@ Today, I almost completed the most important component - `Simple` and its two ch
 A good news is that I used the Promise API and RegExp in a project to handle the asynchronous tasks.
 
 
+### Nov 7 2021
+Yesterday I went to watch the League of Legend final and congrats to EDG winning the champion. For today's work, I just realized the fact that in JS the float number calculation had some inaccuracy such as `0.1 + 0.2 !== 0.3`. So to make things more simple, I imported the `math.js` to handle these accuracy issues.
+
+An impressive issue I met is that I misused the loop expression `for ... in ...` to iterate a string. It should be used to iterate an object. And the result to iterate a string (or array) is to show their index value as string. An example is below:
+```js
+let str = '123'
+let arr = [1, 2, 3]
+for (let i in str) {
+    console.log(typeof i) //string string string
+    console.log(i) // 0 1 2
+}
+for (let i in arr) {
+    console.log(typeof i) //string string string
+    console.log(i) // 0 1 2
+}
+```
+
