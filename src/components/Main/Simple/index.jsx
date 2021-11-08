@@ -64,6 +64,10 @@ export default class Simple extends Component {
         this.tokenResult = PubSub.subscribe('result', (_,stateObj) => {
             this.setState(stateObj)
         })
+        //订阅History组件中的item，用于还原历史记录
+        this.tokenFlashback = PubSub.subscribe('flashback', (_,lhs) => {
+            this.setState({userInput: lhs})
+        })
     }
 
     //每次组件更新时，发布消息，通知Error取消报错提示，通知Evaluator改变当前状态
@@ -73,7 +77,7 @@ export default class Simple extends Component {
     }
 
     componentWillUnmount(){
-        PubSub.unsubscribe(this.tokenResult)
+        PubSub.unsubscribe(this.tokenResult, this.tokenFlashback)
     }
 
     render() {

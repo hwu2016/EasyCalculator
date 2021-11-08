@@ -1,11 +1,33 @@
 import React, { Component } from 'react'
-import './index.css'
 import Item from './Item'
+import PubSub from 'pubsub-js'
+import './index.css'
 
 export default class History extends Component {
     state = {
-        records: [1]                                                                                                                                                                                                                                                                                                                                                                                        
+        records: [],                                                                                                                                                                                                                                                                                                                                                                                 
     }
+
+    deleteRecord = (id) => {
+        const {records} = this.state
+        const newRecords = records.filter((recordObj) => {
+            return recordObj.id !== id
+        })
+        this.setState({records: newRecords})
+    }    
+
+    componentDidMount(){
+        this.tokenNewItem = PubSub.subscribe('newItem', (_, recordObj) => {
+            const {records} = this.state
+            this.setState({records: [recordObj, ...records]})
+        })
+    }
+
+    componentWillUnmount(){
+        PubSub.unsubscribe(this.tokenNewItem)
+    }
+
+
     render() {
         const {records} = this.state
         return (
@@ -14,7 +36,7 @@ export default class History extends Component {
                 <ul className="itemWrapper">
                     {
                         records.map((record) => {
-                            return <Item/>
+                            return <Item key={record.id} id={record.id} lhs={record.lhs} rhs={record.rhs} deleteRecord={this.deleteRecord}/>
                         })
                     }
                 </ul>

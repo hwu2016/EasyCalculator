@@ -42,3 +42,10 @@ for (let i in arr) {
 }
 ```
 
+
+### Nov 7 2021
+Today I almost finished the `History` part, especially the delete function and the flashback function (I call it a flashback). I found that when I iterated the list item, the `key` prop cannot be read. I also fixed the exponential expression issue in the result. Until today, the fundamental functions of the calculator are done.
+Goals tomorrow: 
+1. setup the maximum of history list and auto-delete the earliest item if the stack is exceeded.
+2. fix any other issue found and save a copy file as a demo
+3. start to design the UI part (the most exciting thing)

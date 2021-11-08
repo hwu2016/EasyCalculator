@@ -1,13 +1,16 @@
 import React, { Component } from 'react'
 import PubSub from 'pubsub-js'
 import {evaluate, format} from 'mathjs'
+import { nanoid } from 'nanoid'
 
 export default class Evaluator extends Component {
-    state = { isError: false }
+    state = {
+         isError: false,
+    }
 
     //计算
     evaluateInput = () => {
-        //开启异步任务，先查错再计算
+        //开启异步任务，先查错，再发布当前input给历史记录，最后计算，添加计算结果到history
         new Promise((resolve, reject) => {
             const { curInput } = this.props
             this.findError(curInput)
@@ -17,14 +20,15 @@ export default class Evaluator extends Component {
             if (!isError) {
                 //对当前字符串进行反向翻译处理，乘 ->*, 除 -> /
                 let modifiedInput = this.modifyStr(curInput)
-                //通过第三方库解决js内置计算精度问题
-                // eslint-disable-next-line
-                const res = format(evaluate(modifiedInput),{precision: 14})
+                //通过第三方库解决js内置计算精度问题，以及解放科学计数上限
+                const res = format(evaluate(modifiedInput),{lowerExp: -8, upperExp: 15, precision: 15})
                 if (res === 'Infinity' || res === '-Infinity') {
                     this.reportError('resultError', 'The Divisor Should Not Be Zero')
                 } else {
-                    //返回结果的字符串形式
-                    this.reportResult(res.toString())
+                    //将结果的字符串形式传给Simple
+                    PubSub.publish('result', { userInput: res.toString() })
+                    //将所需信息传给history用于遍历渲染item
+                    PubSub.publish('newItem', {id: nanoid(), lhs: curInput, rhs: res})
                 }
             }
         })
@@ -122,6 +126,7 @@ export default class Evaluator extends Component {
                 let patternBefore = /[0-9]|\)|\(/
                 let patternAfter = /[0-9]|\(/
                 //末位，以及前后字符不符合正则表达式报错
+                if (i === 0) continue
                 if (i === n - 1 || !patternBefore.test(data[i - 1]) || !patternAfter.test(data[i + 1])) {
                     syntax = false
                     break
@@ -139,16 +144,15 @@ export default class Evaluator extends Component {
         PubSub.publish('error', { err: `${errorType}: ${detail}` })
     }
 
-    //发布结果给Simple组件
-    reportResult = (result) => {
-        PubSub.publish('result', { userInput: result })
-    }
-
     componentDidMount(){
         //订阅Simple，当报错结束后，可以改变自己的状态
         this.tokenIsError = PubSub.subscribe('updateIsError', () => {
             this.setState({isError: false})
         })
+    }
+
+    componentWillUnmount() {
+        PubSub.unsubscribe(this.tokenIsError)
     }
 
     render() {

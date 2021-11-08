@@ -61,11 +61,11 @@
     transform: scale(1.2);
 }
 
-#item_back{
+#item_flashback{
     background-color: lightgreen;
 }
 
-#item_back:hover {
+#item_flashback:hover {
     transform: scale(1.2);
 }
 
