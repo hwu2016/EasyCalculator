@@ -1,4 +1,4 @@
-## CyberCalculator 
+## EasyCalculator 
 ### Version 1.0.0
 A Web-based online calculator with light and novel design, developed by `React.js`.
 ### Features
