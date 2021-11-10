@@ -16,11 +16,24 @@ export default class History extends Component {
         this.setState({records: newRecords})
     }    
 
+    clearHistory = () => {
+        this.setState({records: []})
+    }
+
     componentDidMount(){
         this.tokenNewItem = PubSub.subscribe('newItem', (_, recordObj) => {
             const {records} = this.state
             this.setState({records: [recordObj, ...records]})
         })
+    }
+
+    componentDidUpdate(){
+        //check是否当前已达到record, 若达到则删除队尾
+        const {records} = this.state
+        if (records.length === 10) {
+            records.pop()
+            this.setState({records: records})
+        }
     }
 
     componentWillUnmount(){
@@ -32,7 +45,10 @@ export default class History extends Component {
         const {records} = this.state
         return (
             <div className="history_wrapper">
-                <p id='title'>Historical Records</p>
+                <div id='title'>
+                    <p>Historical Records</p>
+                    <button id="clearAll" onClick={this.clearHistory}></button>
+                </div>
                 <ul className="itemWrapper">
                     {
                         records.map((record) => {

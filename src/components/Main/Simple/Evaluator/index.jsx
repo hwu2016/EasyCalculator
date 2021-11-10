@@ -24,6 +24,8 @@ export default class Evaluator extends Component {
                 const res = format(evaluate(modifiedInput),{lowerExp: -8, upperExp: 15, precision: 15})
                 if (res === 'Infinity' || res === '-Infinity') {
                     this.reportError('resultError', 'The Divisor Should Not Be Zero')
+                } else if (curInput === res.toString()){
+                    return;
                 } else {
                     //将结果的字符串形式传给Simple
                     PubSub.publish('result', { userInput: res.toString() })

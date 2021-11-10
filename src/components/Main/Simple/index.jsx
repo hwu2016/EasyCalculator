@@ -32,7 +32,7 @@ export default class Simple extends Component {
 
     //统一处理键盘事件
     kbEvent = (e) => {
-        const kbfilter = ['1','2','3','4','5','6','7','8','9','0','+','-','*','/','(',')','Backspace']
+        const kbfilter = ['1','2','3','4','5','6','7','8','9','0','+','-','*','/','(',')','Backspace','Enter']
         if (kbfilter.indexOf(e.key) === -1) return;     
         switch (e.key) {
             case '(':
@@ -49,6 +49,9 @@ export default class Simple extends Component {
                 break
             case 'Backspace':
                 this.deleteNode.click()
+                break
+            case 'Enter':
+                this.EvaluatorNode.evaluateInput()
                 break
             default:
                 this.setState({userInput: this.state.userInput + e.key})
@@ -105,7 +108,7 @@ export default class Simple extends Component {
                     <button onClick={this.clickTypeIn} className="num">0</button>
                     <button onClick={this.clickTypeIn} className="dot">.</button>
                     <button onClick={this.clickTypeIn} className="operator">+</button>
-                    <Evaluator curInput={userInput}/>
+                    <Evaluator curInput={userInput} ref={c => this.EvaluatorNode = c}/>
                     <Error/>
                 </div>
             </div>

@@ -1,7 +1,7 @@
 @font-face {
   font-family: 'icomoon';
-  src:  url('fonts/icomoon.eot?phnv33');
-  src:  url('fonts/icomoon.eot?phnv33#iefix') format('embedded-opentype'),
+  src: url('fonts/icomoon.eot?phnv33');
+  src: url('fonts/icomoon.eot?phnv33#iefix') format('embedded-opentype'),
     url('fonts/icomoon.ttf?phnv33') format('truetype'),
     url('fonts/icomoon.woff?phnv33') format('woff'),
     url('fonts/icomoon.svg?phnv33#icomoon') format('svg');
@@ -10,10 +10,10 @@
   font-display: block;
 }
 
-[class^="icon-"], [class*=" icon-"] {
+[class^="icon-"],
+[class*=" icon-"] {
   /* use !important to prevent issues with browser extensions that change fonts */
   font-family: 'icomoon' !important;
-  speak: never;
   font-style: normal;
   font-weight: normal;
   font-variant: normal;
@@ -29,14 +29,16 @@
   content: "\e904";
   color: #7bb32e;
 }
+
 .icon-github:before {
   content: "\eab0";
 }
 
-html{
+html {
   font-size: 16px;
 }
 
-body{
+body {
   background-color: #333;
 }
+

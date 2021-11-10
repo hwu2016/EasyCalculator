@@ -49,3 +49,7 @@ Goals tomorrow:
 1. setup the maximum of history list and auto-delete the earliest item if the stack is exceeded.
 2. fix any other issue found and save a copy file as a demo
 3. start to design the UI part (the most exciting thing)
+
+### Nov 10 2021
+Finally finished the initial version of my first project!
+

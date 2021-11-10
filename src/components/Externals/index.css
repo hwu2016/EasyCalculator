@@ -4,13 +4,20 @@
     height: 2.5rem;
     width: 100%;
     min-width: 62rem;
-    background-color: rgba(255,255,255, 0.2);
+    background-color: rgba(255, 255, 255, 0.2);
     bottom: 0;
     align-items: center;
     justify-content: center;
     font-size: 1.5rem;
     text-indent: 1.5rem;
-}
+  }
+
+#copyright {
+    position: absolute;
+    left: 1rem;
+    font-size: 0.8rem;
+    color: white;
+} 
 
 .links-wrapper {
     display: flex;
@@ -25,3 +32,8 @@
     transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 
+
+.wechat_img {
+    position: absolute;
+    transform: translate(-40rem, -6rem) scale(0.15);
+}

@@ -1,0 +1,12 @@
+.header{
+    position: fixed;
+    height: 2.5rem;
+    width: 100%;
+    min-width: 62rem;
+    background-color: rgba(255, 255, 255, 0.2);
+    top: 0;
+}
+
+.header img {
+    transform: translate(-12rem, -4rem) scale(0.3);
+}
