@@ -2,7 +2,8 @@
     margin: auto;
     display: flex;
     min-width: 62rem;
-    height: 43rem;
+    height: calc(100vh);
+    min-height: 40rem;
     align-items: center;
     justify-content: space-between;
     transition: all 0.6s;
