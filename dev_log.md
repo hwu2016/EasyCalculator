@@ -1,4 +1,4 @@
-## Cyber Calculator
+## EasyCalculator
 ---
 ### Preface
 The purpose of doing this project is to training my coding skills using React.js as well as comprehensive Javascript and CSS3. Actually, this is my first personal project since I learned Web development, so I guess I'll try my best to make it seem like a real project rather than a 'demo' (I've already done a lot of demos lol). And I wish I could keep updating this project as much as possible before I get a job.
@@ -6,7 +6,7 @@ The purpose of doing this project is to training my coding skills using React.js
 As you can see the project name, an online calculator seems not to be complicated, but when I did it, I found it actually requires a deep understanding of Javascript and I need to be familiar with communication of components for React.js. So, well, it's definitely a challenge to me, but I believe the result would turn out to be positive :)
 
 ### Nov 4 2021
-I really like the theme and concept of the game "Cyberpunk 2077", and that's why I chose this project when I was brainstorming. Okay, so generally, I'd like to have a welcome page, an external link component, a calculator board and a historical record board. I hope I can store my data whenever I completed a calculation, and go back to my previous data when I need it. I hope I can develop two modes of calculator--one standard and one advanced or scientific. Well, making a scientific calculator may take a lot of time, so firstly making the simple one!
+Okay, so generally, I'd like to have a welcome page, an external link component, a calculator board and a historical record board. I hope I can store my data whenever I completed a calculation, and go back to my previous data when I need it. I hope I can develop two modes of calculator--one standard and one advanced or scientific. Well, making a scientific calculator may take a lot of time, so firstly making the simple one!
 
 Here is my designed list of components: `Welcome`, `Externals`, `Main`.
 For Main, --`Advanced`, `Simple`, `History`
@@ -51,5 +51,5 @@ Goals tomorrow:
 3. start to design the UI part (the most exciting thing)
 
 ### Nov 10 2021
-Finally finished the initial version of my first project!
+Got fixed some issues and added a logo. Finally finished the initial version of my first project!
 
